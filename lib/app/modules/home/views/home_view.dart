@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_crud/app/modules/widgets/custom_button.dart';
 
 import 'package:get/get.dart';
 import '../../widgets/custom_text_input.dart';
@@ -21,41 +22,36 @@ class HomeView extends GetView<HomeController> {
           ),
           SizedBox(height: 40),
           CustomInputText(
-            inputType: TextInputType.emailAddress,
-            onSendOtpClicked: () {
-              controller.sendOTP(controller.emailC.text.trim());
-            },
-            onValueChanged: (vale) {},
+            inputType: TextInputType.name,
             textColor: Colors.black,
-            textEditingController: controller.emailC,
-            textFieldErrorText: 'masukan email id',
-            textFieldHintText: 'email',
-            textFieldIcon: Icons.email,
-            textfilledType: 'email',
+            textEditingController: controller.namaC,
+            textFieldHintText: 'Nama',
+            textFieldIcon: Icons.person,
           ),
           SizedBox(height: 30),
           CustomInputText(
-            inputType: TextInputType.number,
-            onSendOtpClicked: () {},
-            onValueChanged: (vale) {},
+            inputType: TextInputType.emailAddress,
             textColor: Colors.black,
-            textEditingController: controller.otpC,
-            textFieldErrorText: 'masukan nomor otp',
-            textFieldHintText: 'OTP',
+            textEditingController: controller.emailC,
+            textFieldHintText: 'Email',
             textFieldIcon: Icons.email,
-            textfilledType: 'otp',
           ),
           SizedBox(height: 30),
-          Container(
-            height: 40,
-            child: ElevatedButton(
-              onPressed: () {
-                controller.validateOTP(
-                  controller.emailC.text.trim(),
-                  controller.otpC.text.trim(),
-                );
+          CustomInputText(
+            textEditingController: controller.passC,
+            inputType: TextInputType.visiblePassword,
+            textColor: Colors.black,
+            textFieldHintText: 'Password',
+            textFieldIcon: Icons.key,
+          ),
+          SizedBox(height: 30),
+          Obx(
+            () => CustomButton(
+              onpressed: () {
+                controller.register();
               },
-              child: Text('KIRIM OTP'),
+              textButton: Text(
+                  controller.isLoading.isFalse ? "REGISTER" : "LOADING..."),
             ),
           ),
         ],
